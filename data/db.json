@@ -1,0 +1,22 @@
+{
+  "blogs": [
+    {
+      "title": "Introduction to Mario",
+      "body": "Body Mario 1",
+      "author": "Mario",
+      "id": 123456
+    },
+    {
+      "title": "Luigi's Abilities and Power-ups",
+      "body": "Body Luigi 2",
+      "author": "Luigi",
+      "id": 789012
+    },
+    {
+      "title": "The Evolution of Mario",
+      "body": "Body 3",
+      "author": "Mario",
+      "id": 852963
+    }
+  ]
+}
