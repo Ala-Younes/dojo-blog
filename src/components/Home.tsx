@@ -1,4 +1,4 @@
-import BlogList from "./BlogList";
+import BlogList from "./Blog/List";
 import { useFetch } from "../hooks/useFetch";
 
 const Home = () => {
@@ -12,7 +12,7 @@ const Home = () => {
     <>
       {error && <div>{error}</div>}
       {isPending && <div>Loading ...</div>}
-      <BlogList blogs={blogs} title={"All blogs"} />
+      <BlogList blogs={blogs} />
     </>
   );
 };
