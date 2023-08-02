@@ -3,7 +3,7 @@ import { Link } from "react-router-dom";
 const Navbar = () => {
   return (
     <nav className="flex py-4 justify-between items-center border-b-[0.1rem] border-b-secondary ">
-      <h1 className="text-2xl text-secondary font-bold">The Dojo Blog</h1>
+      <h1>The Dojo Blog</h1>
       <div className="flex gap-6 ">
         <Link
           to={"/"}

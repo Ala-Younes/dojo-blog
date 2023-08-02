@@ -24,7 +24,7 @@ const BlogCreate = () => {
   };
   return (
     <div className="max-w-md my-auto text-center">
-      <h2 className="text-xl text-secondary mb-5">Add a New Blog</h2>
+      <h2>Add a New Blog</h2>
       <form onSubmit={handleSubmit}>
         <label className="text-left block">Blog title:</label>
         <input
@@ -51,13 +51,9 @@ const BlogCreate = () => {
           <option value="yoshi">yoshi</option>
         </select>
         {!isPending ? (
-          <button className="mt-4 bg-secondary text-white outline-none px-4 py-2 rounded-xl cursor-pointer">
-            Add Blog
-          </button>
+          <button className="button">Add Blog</button>
         ) : (
-          <button className="mt-4 bg-secondary text-white outline-none px-4 py-2 rounded-xl cursor-pointer">
-            Adding Blog ...
-          </button>
+          <button className="button">Adding Blog ...</button>
         )}
       </form>
     </div>
