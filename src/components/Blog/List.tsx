@@ -16,7 +16,7 @@ const BlogList = ({ blogs, onDelete }: BlogListProps) => {
       {blogs.length > 0 ? (
         blogs.map((blog) => (
           <div
-            className=" px-3 py-4 mx-5 border-b border-primary shadow-xl hover:bg-gray-50"
+            className=" px-3 py-4 mx-5 border-b border-primary shadow-xl hover:bg-gray-200"
             key={blog.id}
           >
             <Link to={`/blogs/${blog.id}`}>

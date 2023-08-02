@@ -1,4 +1,5 @@
 import "./App.css";
+import { ToastProvider } from "./Providers/toast-provider";
 import BlogCreate from "./components/Blog/Create";
 import BlogDetails from "./components/Blog/Details";
 import NotFound from "./components/Common/NotFound";
@@ -10,6 +11,7 @@ const App = () => {
   return (
     <Router>
       <div className="container max-w-6xl mx-auto px-5 py-6">
+        <ToastProvider />
         <Navbar />
         <div className="content">
           <Switch>

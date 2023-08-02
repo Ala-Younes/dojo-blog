@@ -1,38 +1,52 @@
 import { useState } from "react";
-import { toast } from "react-hot-toast";
 import { useHistory } from "react-router-dom";
+import { Blog } from "../../data";
+import toast from "react-hot-toast";
 
-const BlogCreate = () => {
-  const [title, setTitle] = useState("");
-  const [body, setBody] = useState("");
-  const [author, setAuthor] = useState("mario");
+interface BlogEditProps {
+  blog?: Blog;
+}
+const BASIC_URL = import.meta.env.VITE_BASIC_URL;
+
+const BlogEdit = ({ blog }: BlogEditProps) => {
+  const [title, setTitle] = useState(blog?.title);
+  const [body, setBody] = useState(blog?.body);
+  const [author, setAuthor] = useState(blog?.author);
   const [isPending, setIsPending] = useState(false);
 
   const history = useHistory();
 
-  const handleSubmit = (event: React.SyntheticEvent<HTMLFormElement>) => {
+  const handleSubmit = async (event: React.SyntheticEvent<HTMLFormElement>) => {
     event.preventDefault();
     setIsPending(true);
-    const blog = { title, body, author };
-    fetch("http://localhost:8000/blogs", {
-      method: "POST",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify(blog),
-    })
-      .then(() => {
+
+    const updatedBlog = { title, body, author };
+
+    try {
+      const response = await fetch(`${BASIC_URL}/blogs/${blog?.id}`, {
+        method: "PUT",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(updatedBlog),
+      });
+
+      if (response.ok) {
         setIsPending(false);
         history.push("/");
-        toast.success("Blog Added Successfully!");
-      })
-      .catch(() => {
-        setIsPending(false);
-        toast.error("An error occurred while adding the blog.");
-      });
+        toast.success("Blog updated successfully!");
+      } else {
+        throw new Error("An error occurred while updating the blog.");
+      }
+    } catch (e) {
+      if (e instanceof Error) {
+        toast.error(e.message);
+      }
+      setIsPending(false);
+    }
   };
 
   return (
     <div className="pt-8 my-auto text-center flex flex-col items-center justify-center gap-8">
-      <h2>Add a New Blog</h2>
+      <h2>Update Blog</h2>
       <form className="w-96" onSubmit={handleSubmit}>
         <label className="text-left block">Blog title:</label>
         <input
@@ -59,13 +73,19 @@ const BlogCreate = () => {
           <option value="yoshi">yoshi</option>
         </select>
         {!isPending ? (
-          <button className="button mt-8">Add Blog</button>
+          <button className="button mt-8">Update</button>
         ) : (
-          <button className="button mt-8">Adding Blog ...</button>
+          <>
+            <button className="button mt-8">Updating Blog ...</button>
+          </>
         )}
       </form>
     </div>
   );
 };
 
-export default BlogCreate;
+BlogEdit.defaultProps = {
+  blog: { title: "", body: "", author: "mario" },
+};
+
+export default BlogEdit;

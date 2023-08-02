@@ -1,11 +1,15 @@
-import { useHistory, useParams } from "react-router-dom";
+import { useParams } from "react-router-dom";
 import { useFetch } from "../../hooks/useFetch";
+import { useState } from "react";
+import BlogEdit from "./Edit";
 
 interface RouteParams {
   id: string;
 }
 
 const BlogDetails = () => {
+  const [isEdit, setIsEdit] = useState(false);
+
   const { id }: RouteParams = useParams();
   const {
     data: blogs,
@@ -14,31 +18,47 @@ const BlogDetails = () => {
   } = useFetch(`http://localhost:8000/blogs`);
 
   const blog = blogs?.find((blog) => blog.id === parseInt(id));
-  const history = useHistory();
 
-  const handleDelete = (id: number) => {
-    fetch("http://localhost:8000/blogs/" + id, {
-      method: "DELETE",
-    }).then(() => {
-      history.push("/");
-    });
+  const handleUpdate = (id: number) => {
+    console.log(id);
+    setIsEdit(true);
   };
 
   return (
-    <div className="pt-8">
-      {isPending && <div> {isPending}</div>}
-      {error && <div> {error}</div>}
-      {blog && (
-        <article className="flex flex-col gap-4">
-          <h2>{blog.title}</h2>
-          <p>Written by {blog.author}</p>
-          <p>{blog.body}</p>
-          <button className="button" onClick={() => handleDelete(blog.id)}>
-            Delete
-          </button>
-        </article>
+    <>
+      {!isEdit ? (
+        <div className="mt-8 pt-8 bg-gray-100">
+          {isPending && <div> {isPending}</div>}
+          {error && <div> {error}</div>}
+          {blog && (
+            <article className="flex flex-col gap-4 items-center mx-auto">
+              <h2 className="bg-gray-200 w-full">
+                <span className="text-black font-bold"> Title : </span>
+                {blog.title}
+              </h2>
+              <p className="bg-gray-300 w-full">
+                <span className="text-black text-xl font-bold">
+                  Written by :
+                </span>
+                {blog.author}
+              </p>
+              <p className="bg-gray-400 w-full">
+                <span className="text-black text-xl font-bold">Content :</span>
+                {blog.body}
+              </p>
+              <button
+                className="button max-w-xs"
+                onClick={() => handleUpdate(blog.id)}
+              >
+                Update
+              </button>
+            </article>
+          )}
+        </div>
+      ) : (
+        <BlogEdit blog={blog} />
       )}
-    </div>
+    </>
   );
 };
 
