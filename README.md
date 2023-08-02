@@ -48,3 +48,13 @@ class="font-primary"
 >
 
 ```
+
+# Git Ignore
+
+add it to the gitignore file
+
+- example : data/db.json
+
+```
+git rm --cached data/db.json
+```

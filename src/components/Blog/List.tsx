@@ -12,26 +12,27 @@ const BlogList = ({ blogs, onDelete }: BlogListProps) => {
   };
 
   return (
-    <div className="flex flex-col gap-8">
+    <div className="container mx-auto grid md:grid-cols-2 lg:grid-cols-3">
       {blogs.length > 0 ? (
         blogs.map((blog) => (
-          <div
-            className=" px-3 py-4 mx-5 border-b border-primary shadow-xl hover:bg-gray-200"
-            key={blog.id}
-          >
-            <Link to={`/blogs/${blog.id}`}>
+          <Link to={`/blogs/${blog.id}`} key={blog.id} className="">
+            <div className=" px-3 py-4 mx-5 border-b border-primary shadow-xl hover:bg-gray-200">
               <h2>{blog.title}</h2>
               <p>Written by {blog.author}</p>
-            </Link>
-            <button className="button" onClick={() => handleDelete(blog.id)}>
-              Delete
-            </button>
-          </div>
+              <Link
+                to={"/"}
+                className="button"
+                onClick={() => handleDelete(blog.id)}
+              >
+                Delete
+              </Link>
+            </div>
+          </Link>
         ))
       ) : (
         <Link
           to={"/create"}
-          className="text-2xl text-center pt-8 hover:underline underline-offset-8"
+          className="text-2xl pt-8 hover:underline underline-offset-8 md:col-span-2 lg:col-span-3 text-center"
         >
           📝 Please Add a Blog 🖊️
         </Link>

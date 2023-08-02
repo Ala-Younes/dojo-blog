@@ -19,8 +19,7 @@ const BlogDetails = () => {
 
   const blog = blogs?.find((blog) => blog.id === parseInt(id));
 
-  const handleUpdate = (id: number) => {
-    console.log(id);
+  const handleUpdate = () => {
     setIsEdit(true);
   };
 
@@ -46,10 +45,7 @@ const BlogDetails = () => {
                 <span className="text-black text-xl font-bold">Content :</span>
                 {blog.body}
               </p>
-              <button
-                className="button max-w-xs"
-                onClick={() => handleUpdate(blog.id)}
-              >
+              <button className="button max-w-xs" onClick={handleUpdate}>
                 Update
               </button>
             </article>
