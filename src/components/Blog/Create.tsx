@@ -1,11 +1,13 @@
-import { useEffect, useState } from "react";
+import { useState } from "react";
+import { useHistory } from "react-router-dom";
 
 const BlogCreate = () => {
   const [title, setTitle] = useState("");
   const [body, setBody] = useState("");
-  const [author, setAuthor] = useState("");
-
+  const [author, setAuthor] = useState("mario");
   const [isPending, setIsPending] = useState(false);
+
+  const history = useHistory();
 
   const handleSubmit = (event: React.SyntheticEvent<HTMLFormElement>) => {
     event.preventDefault();
@@ -16,8 +18,8 @@ const BlogCreate = () => {
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify(blog),
     }).then(() => {
-      console.log("New Blog added");
       setIsPending(false);
+      history.push("/");
     });
   };
   return (
