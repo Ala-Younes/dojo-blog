@@ -3,5 +3,5 @@ body {
 }
 
 .button {
-  @apply rounded-md bg-secondary p-1;
+  @apply rounded-md bg-secondary text-white p-1 hover:bg-lightSecondary outline-none border border-secondary;
 }

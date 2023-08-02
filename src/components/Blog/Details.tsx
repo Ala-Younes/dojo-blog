@@ -26,7 +26,7 @@ const BlogDetails = () => {
   return (
     <>
       {!isEdit ? (
-        <div className="mt-8 pt-8 bg-gray-100">
+        <div className="mt-8 p-8 bg-slate-100">
           {isPending && <div> {isPending}</div>}
           {error && <div> {error}</div>}
           {blog && (
@@ -45,7 +45,7 @@ const BlogDetails = () => {
                 <span className="text-black text-xl font-bold">Content :</span>
                 {blog.body}
               </p>
-              <button className="button max-w-xs" onClick={handleUpdate}>
+              <button className="button max-w-md w-full" onClick={handleUpdate}>
                 Update
               </button>
             </article>
