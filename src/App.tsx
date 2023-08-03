@@ -8,6 +8,7 @@ import Navbar from "./components/Navbar";
 import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
 
 const App = () => {
+  // ! Here goes the store provider
   return (
     <Router>
       <div className="container max-w-6xl mx-auto px-5 py-6">

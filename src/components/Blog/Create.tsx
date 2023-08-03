@@ -3,6 +3,7 @@ import { toast } from "react-hot-toast";
 import { useHistory } from "react-router-dom";
 
 const BlogCreate = () => {
+  // TODO use react hook form + zod
   const [title, setTitle] = useState("");
   const [body, setBody] = useState("");
   const [author, setAuthor] = useState("mario");
